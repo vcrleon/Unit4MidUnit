@@ -3,11 +3,14 @@ package com.example.c4q.unit4midunit.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.c4q.unit4midunit.R;
 import com.example.c4q.unit4midunit.controller.BookAdapter;
@@ -16,6 +19,7 @@ import com.example.c4q.unit4midunit.json.Books;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -27,6 +31,9 @@ public class BottomFragment extends Fragment {
     View rootView;
     List<Books> booksList;
     RecyclerView booksRecyclerView;
+    TextView title;
+    TextView author;
+    TextView year;
 
 
     public BottomFragment() {
@@ -40,10 +47,64 @@ public class BottomFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_bottom, container, false);
         booksRecyclerView = rootView.findViewById(R.id.book_recycler_view);
-        BookAdapter bookAdapter = new BookAdapter(booksList);
+        final BookAdapter bookAdapter = new BookAdapter(booksList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         booksRecyclerView.setAdapter(bookAdapter);
         booksRecyclerView.setLayoutManager(linearLayoutManager);
+
+        title = rootView.findViewById(R.id.book_title_view);
+        author = rootView.findViewById(R.id.book_author_view);
+        year = rootView.findViewById(R.id.book_year_view);
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TopFragment topFragment = new TopFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Book_Title", //not sure how to get info form rv));
+                topFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.fragment_main_container, topFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+        author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TopFragment topFragment = new TopFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Book_Author", //not sure how to get info form rv));
+                        topFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.fragment_main_container, topFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+        year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TopFragment topFragment = new TopFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Book_Year", //not sure how to get info form rv));
+                        topFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.fragment_main_container, topFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
 
 
         JSONObject jsonObject = new JSONObject();
