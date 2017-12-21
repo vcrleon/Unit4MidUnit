@@ -3,13 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:id="@+id/fragment_display_container"
     tools:context="com.example.c4q.unit4midunit.fragments.DisplayFragment">
 
         <!-- TODO: Update blank fragment layout -->
-        <TextView
+
+        <FrameLayout
+            android:id="@+id/top_frag_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/bottom_frag_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
 
 </LinearLayout>
